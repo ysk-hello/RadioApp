@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  radio-db:    # docker-compose exec service name bash
+    container_name: radio-db
+    image: mariadb:10.7
+    environment:
+      MARIADB_ROOT_PASSWORD: password
+    volumes:
+      - radio-data:/var/lib/mysql
+  radio-web:   # docker-compose exec service name bash
+    container_name: radio-web
+    build: .
+    tty: true # コンテナを起動したままにする
+    depends_on:
+      - radio-db
+    environment:
+      DATABASE_PASSWORD: password
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/app
+
+volumes:
+  radio-data:

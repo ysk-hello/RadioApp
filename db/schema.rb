@@ -13,8 +13,8 @@
 ActiveRecord::Schema.define(version: 2023_11_16_041122) do
 
   create_table "available_stations", charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
-    t.string "prefecture_code", null: false
-    t.integer "station_code", null: false
+    t.integer "prefecture_code", null: false
+    t.string "station_code", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["prefecture_code"], name: "fk_rails_bf31bbef89"
@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2023_11_16_041122) do
     t.index ["program_id"], name: "fk_rails_f5526408e1"
   end
 
-  create_table "prefectures", primary_key: "code", id: :string, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  create_table "prefectures", primary_key: "code", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -41,17 +41,17 @@ ActiveRecord::Schema.define(version: 2023_11_16_041122) do
     t.string "title", null: false
     t.datetime "start_time", null: false
     t.datetime "end_time", null: false
-    t.text "information", null: false
-    t.string "url", null: false
-    t.string "image", null: false
-    t.string "performers", null: false
-    t.integer "station_code", null: false
+    t.text "information"
+    t.string "url"
+    t.string "image"
+    t.string "performers"
+    t.string "station_code", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["station_code"], name: "fk_rails_b1b61e7e8f"
   end
 
-  create_table "stations", primary_key: "code", id: :integer, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
+  create_table "stations", primary_key: "code", id: :string, charset: "utf8mb4", collation: "utf8mb4_general_ci", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

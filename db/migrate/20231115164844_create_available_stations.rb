@@ -1,8 +1,8 @@
 class CreateAvailableStations < ActiveRecord::Migration[6.1]
   def change
     create_table :available_stations do |t|
-      t.string :prefecture_code, null: false
-      t.integer :station_code, null: false
+      t.integer :prefecture_code, null: false
+      t.string :station_code, null: false
 
       t.timestamps
     end

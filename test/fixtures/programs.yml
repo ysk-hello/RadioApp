@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  start_time: 2023-11-16 13:08:41
+  end_time: 2023-11-16 13:08:41
+  information: MyText
+  url: MyString
+  image: MyString
+  performers: MyString
+  station_code: 1
+
+two:
+  title: MyString
+  start_time: 2023-11-16 13:08:41
+  end_time: 2023-11-16 13:08:41
+  information: MyText
+  url: MyString
+  image: MyString
+  performers: MyString
+  station_code: 1

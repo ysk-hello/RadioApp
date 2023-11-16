@@ -3,7 +3,7 @@ FROM ruby:3.0.4
 # railsの前提条件
 RUN apt-get update -qq
 RUN curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - && apt-get install -y nodejs
-RUN apt install -y cron nano systemctl
+RUN apt install -y cron nano systemctl mariadb-client
 # npm必要
 RUN npm install --global yarn
 

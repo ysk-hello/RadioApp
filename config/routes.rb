@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  get 'programs/index'
+  get 'programs/show'
+  get 'programs/:id', to: 'programs#show'
+  
+  post 'messages/create'
+  get 'messages/delete/:id/:pwd', to: 'messages#destroy'
 end

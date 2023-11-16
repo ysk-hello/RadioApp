@@ -1,0 +1,67 @@
+<h1><%= @program['title'] %></h1>
+
+<ul>
+    <li><%= @program['start_time'] %></li>
+    <li><%= @program['end_time'] %></li>
+    <li><%= @program['information'].html_safe %></li>
+    <li><a href="<%= @program['url'] %>" target="_blank"><%= @program['url'] %><a></li>
+    <li><%= @program['performers'] %></li>
+</ul>
+
+<hr>
+
+<h2>掲示板</h2>
+<h3 class="my-3">投稿フォーム</h3>
+<%= form_with(model: Message.new, url: messages_create_path) do |form| %>
+<%= form.hidden_field :program_id, {value: @program['id']}%>
+
+<!--- https://qiita.com/miku66/items/9de7c5ef625d7704da2a --->
+<ul>
+    <li id="name">
+        <%= form.label :name, "投稿者" %>
+        <%= form.text_field :name %>
+    </li>
+    <li id="content">
+        <%= form.label :content, "内容" %>
+        <%= form.text_area :content, :size => "60x10" %>
+    </li>
+    <li id="delete-password">
+        <%= form.label :delete_password, "削除用パスワード" %>
+        <%= form.password_field :delete_password %>
+    </li>
+    <li id="submit-button">
+        <%= form.submit "保存" %>
+    </li>
+</ul>
+<% end %>
+
+<h3 class="my-3">投稿一覧</h3>
+<% if @program.messages.count == 0 %>
+    <p>投稿はありません。</p>
+<% else %>
+    <table class="table">
+        <tr>
+            <th>投稿者</th>
+            <th>内容</th>
+            <th></th>
+        </tr>
+        <% @program.messages.reverse_each do |message| %>
+            <tr>
+                <td><%= message.name %></td>
+                <td><%= message.content %></td>
+                <td>
+                    <a href="javascript:deleteMessage(<%= message.id %>)">削除</a>
+                </td>
+            </tr>
+        <% end %>
+    </table>
+<% end %>
+
+<%= link_to 'Back', programs_index_path %>
+
+<script>
+    function deleteMessage(id){
+        let password = prompt("削除用パスワードを入力してください。")
+        document.location = "/messages/delete/" + id + "/" + password;
+    }
+</script>

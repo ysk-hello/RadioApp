@@ -1,0 +1,16 @@
+<h1>ラジオ番組表</h1>
+
+<table class="table">
+    <% @stations.each do |station| %>
+        <tr>
+            <th><%= station['name'] %></th>
+            <% station.programs.each do |program| %>
+                <td>
+                    <a href="/programs/<%= program.id %>">
+                        <%= program['title'] %>
+                    </a>
+                </td>
+            <% end %>
+        </tr>
+    <% end %>
+</table>

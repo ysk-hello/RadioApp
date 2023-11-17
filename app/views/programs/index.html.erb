@@ -1,6 +1,12 @@
-<h1>ラジオ番組表</h1>
+<h1>ラジオ番組表 <%= @today.strftime('%Y/%m/%d') %></h1>
 
-<table class="table table-bordered">
+<h3 class="my-3">都道府県</h3>
+<%= form_with(url: programs_index_path) do |form| %>
+    <%= form.select :prefecture, @prefectures, :selected => @selected_prefecture_code %>
+    <%= form.submit "OK", class: "btn btn-primary mx-3" %>
+<% end %>
+
+<table class="table table-bordered mt-5">
     <thead>
         <tr>
             <th></th>

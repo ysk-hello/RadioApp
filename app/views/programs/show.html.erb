@@ -27,7 +27,7 @@
 <% end %>
 
 <h3 class="my-3">投稿フォーム</h3>
-<%= form_with(model: @message, url: messages_create_path) do |form| %>        
+<%= form_with(model: @message, url: messages_create_path) do |form| %>
     <%= form.hidden_field :program_id, {value: @program['id']}%>
 
     <!--- https://qiita.com/miku66/items/9de7c5ef625d7704da2a --->

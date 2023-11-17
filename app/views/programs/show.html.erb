@@ -1,11 +1,19 @@
 <h1><%= @program['title'] %></h1>
 
+<p><%= @program['start_time'] %></p>
+<p><%= @program['end_time'] %></p>
+<image src=<%= @program['image'] %>>
+
 <ul>
-    <li><%= @program['start_time'] %></li>
-    <li><%= @program['end_time'] %></li>
-    <li><%= @program['information'].html_safe %></li>
-    <li><a href="<%= @program['url'] %>" target="_blank"><%= @program['url'] %><a></li>
-    <li><%= @program['performers'] %></li>
+    <% if !@program['information'].nil? %>
+        <li><%= @program['information'].html_safe %></li>
+    <% end %>
+    <% if !@program['url'].nil? %>
+        <li><a href="<%= @program['url'] %>" target="_blank"><%= @program['url'] %><a></li>
+    <% end %>
+    <% if !@program['performers'].nil? %>
+        <li><%= @program['performers'] %></li>
+    <% end %>
 </ul>
 
 <hr>

@@ -27,8 +27,10 @@ class MessagesController < ApplicationController
         if message.delete_password == params[:pwd] then
             message.destroy
             puts "destroy"
+            flash[:info] = ["削除しました。"]
         else
             puts "wrong password"
+            flash[:danger] = ["削除できませんでした。パスワードが異なっています。"]
         end
 
         redirect_to "/programs/#{message["program_id"]}"

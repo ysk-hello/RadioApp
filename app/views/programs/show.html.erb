@@ -11,14 +11,15 @@
 <hr>
 
 <h2>掲示板</h2>
-<h3 class="my-3">投稿フォーム</h3>
-<%= form_with(model: @message, url: messages_create_path) do |form| %>
-    <% flash.each do |flash_message_type, flash_messages| %>
-        <% flash_messages.each do |flash_message| %>
-            <div class="alert alert-<%= flash_message_type %>"><%= flash_message %></div>
-        <% end %>
+
+<% flash.each do |flash_message_type, flash_messages| %>
+    <% flash_messages.each do |flash_message| %>
+        <div class="alert alert-<%= flash_message_type %>"><%= flash_message %></div>
     <% end %>
-        
+<% end %>
+
+<h3 class="my-3">投稿フォーム</h3>
+<%= form_with(model: @message, url: messages_create_path) do |form| %>        
     <%= form.hidden_field :program_id, {value: @program['id']}%>
 
     <!--- https://qiita.com/miku66/items/9de7c5ef625d7704da2a --->
@@ -68,6 +69,11 @@
 <script>
     function deleteMessage(id){
         let password = prompt("削除用パスワードを入力してください。")
-        document.location = "/messages/delete/" + id + "/" + password;
+        if(password && password.length > 0) {
+            document.location = "/messages/delete/" + id + "/" + password;
+        }
+        else{
+            console.log('cancel or empty');
+        }
     }
 </script>

@@ -6,13 +6,13 @@
 
 <ul>
     <% if !@program['information'].nil? %>
-        <li><%= @program['information'].html_safe %></li>
+        <li class="li-program"><%= @program['information'].html_safe %></li>
     <% end %>
     <% if !@program['url'].nil? %>
-        <li><a href="<%= @program['url'] %>" target="_blank"><%= @program['url'] %><a></li>
+        <li class="li-program"><a href="<%= @program['url'] %>" target="_blank"><%= @program['url'] %><a></li>
     <% end %>
     <% if !@program['performers'].nil? %>
-        <li><%= @program['performers'] %></li>
+        <li class="li-program"><%= @program['performers'] %></li>
     <% end %>
 </ul>
 

@@ -16,6 +16,8 @@
     <% end %>
 </ul>
 
+<%= link_to 'Back', root_path %>
+
 <hr>
 
 <h2>掲示板</h2>
@@ -24,31 +26,6 @@
     <% flash_messages.each do |flash_message| %>
         <div class="alert alert-<%= flash_message_type %>"><%= flash_message %></div>
     <% end %>
-<% end %>
-
-<h3 class="my-3">投稿フォーム</h3>
-<%= form_with(model: @message, url: messages_create_path) do |form| %>
-    <%= form.hidden_field :program_id, {value: @program['id']}%>
-
-    <!--- https://qiita.com/miku66/items/9de7c5ef625d7704da2a --->
-    <ul>
-        <li id="name">
-            <%= form.label :name, "投稿者" %>
-            <%= form.text_field :name, class: "form-control" %>
-        </li>
-        <li id="content">
-            <%= form.label :content, "内容" %>
-            <%= form.text_area :content, :size => "60x10", class: "form-control" %>
-        </li>
-        <li id="delete-password">
-            <%= form.label :delete_password, "削除用パスワード" %>
-            <%= form.password_field :delete_password, class: "form-control" %>
-        </li>
-    </ul>
-    <div class="text-end">
-        <%= form.submit "保存", class: "btn btn-primary" %>
-    </div>
-</li>
 <% end %>
 
 <h3 class="my-3">投稿一覧</h3>
@@ -61,7 +38,7 @@
             <th>内容</th>
             <th></th>
         </tr>
-        <% @program.messages.reverse_each do |message| %>
+        <% @program.messages.each do |message| %>
             <tr>
                 <td><%= message.name %></td>
                 <td><%= message.content %></td>
@@ -71,6 +48,37 @@
             </tr>
         <% end %>
     </table>
+<% end %>
+
+<%= link_to 'Back', root_path %>
+
+<h3 class="my-3">投稿フォーム</h3>
+<% if @program.messages.count < 10 %>
+    <%= form_with(model: @message, url: messages_create_path) do |form| %>
+        <%= form.hidden_field :program_id, {value: @program['id']}%>
+
+        <!--- https://qiita.com/miku66/items/9de7c5ef625d7704da2a --->
+        <ul>
+            <li id="name">
+                <%= form.label :name, "投稿者" %>
+                <%= form.text_field :name, class: "form-control" %>
+            </li>
+            <li id="content">
+                <%= form.label :content, "内容" %>
+                <%= form.text_area :content, :size => "60x10", class: "form-control" %>
+            </li>
+            <li id="delete-password">
+                <%= form.label :delete_password, "削除用パスワード" %>
+                <%= form.password_field :delete_password, class: "form-control" %>
+            </li>
+        </ul>
+        <div class="text-end">
+            <%= form.submit "保存", class: "btn btn-primary" %>
+        </div>
+    </li>
+    <% end %>
+<% else %>
+    <p>最大投稿数に達しました。投稿できません。</p>
 <% end %>
 
 <%= link_to 'Back', root_path %>

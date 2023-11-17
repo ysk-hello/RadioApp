@@ -1,7 +1,7 @@
 <h1><%= @program['title'] %></h1>
 
-<p><%= @program['start_time'] %></p>
-<p><%= @program['end_time'] %></p>
+<p><%= @program['start_time'].strftime("%Y-%m-%d %H:%M:%S") %></p>
+<p><%= @program['end_time'].strftime("%Y-%m-%d %H:%M:%S") %></p>
 <image src=<%= @program['image'] %>>
 
 <ul>
@@ -32,22 +32,22 @@
 <% if @program.messages.count == 0 %>
     <p>投稿はありません。</p>
 <% else %>
-    <table class="table">
-        <tr>
-            <th>投稿者</th>
-            <th>内容</th>
-            <th></th>
-        </tr>
-        <% @program.messages.each do |message| %>
-            <tr>
-                <td><%= message.name %></td>
-                <td><%= message.content %></td>
-                <td>
-                    <a href="javascript:deleteMessage(<%= message.id %>)">削除</a>
-                </td>
-            </tr>
-        <% end %>
-    </table>
+    <% @program.messages.each_with_index do |message, index| %>
+        <div class="card my-3">
+            <div class="card-header">
+                <%= message.name %> (No.<%= index+1 %>)
+                <span class="float-end">
+                    <a href="javascript:deleteMessage(<%= message.id %>)" class="btn btn-danger">削除</a>
+                </span>
+            </div>
+            <div class="card-text p-3">
+                <%= message.content %>
+            </div>
+            <div class="card-footer text-end">
+                <%= message.created_at.in_time_zone('Tokyo').strftime("%Y-%m-%d %H:%M:%S") %>
+            </div>
+        </div>
+    <% end %>
 <% end %>
 
 <%= link_to 'Back', root_path %>

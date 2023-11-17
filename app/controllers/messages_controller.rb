@@ -1,6 +1,11 @@
 class MessagesController < ApplicationController
     def create
         message = Message.new(message_params)
+        
+        # ハッシュ化
+        # https://qiita.com/kobayashimakoto/items/603d6434ba1952dfea69
+        message.delete_password = BCrypt::Password.create(message.delete_password)
+        
         if message.save
             session[:message] = nil
             flash[:info] = ["保存しました。"]
@@ -24,7 +29,7 @@ class MessagesController < ApplicationController
         message = Message.find(params[:id])
 
         pp message
-        if message.delete_password == params[:pwd] then
+        if BCrypt::Password.new(message.delete_password) == params[:pwd] then
             message.destroy
             puts "destroy"
             flash[:info] = ["削除しました。"]

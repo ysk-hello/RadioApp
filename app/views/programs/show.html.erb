@@ -12,27 +12,33 @@
 
 <h2>掲示板</h2>
 <h3 class="my-3">投稿フォーム</h3>
-<%= form_with(model: Message.new, url: messages_create_path) do |form| %>
-<%= form.hidden_field :program_id, {value: @program['id']}%>
+<%= form_with(model: @message, url: messages_create_path) do |form| %>
+    <% flash.each do |flash_message_type, flash_messages| %>
+        <% flash_messages.each do |flash_message| %>
+            <div class="alert alert-<%= flash_message_type %>"><%= flash_message %></div>
+        <% end %>
+    <% end %>
+        
+    <%= form.hidden_field :program_id, {value: @program['id']}%>
 
-<!--- https://qiita.com/miku66/items/9de7c5ef625d7704da2a --->
-<ul>
-    <li id="name">
-        <%= form.label :name, "投稿者" %>
-        <%= form.text_field :name %>
-    </li>
-    <li id="content">
-        <%= form.label :content, "内容" %>
-        <%= form.text_area :content, :size => "60x10" %>
-    </li>
-    <li id="delete-password">
-        <%= form.label :delete_password, "削除用パスワード" %>
-        <%= form.password_field :delete_password %>
-    </li>
-    <li id="submit-button">
-        <%= form.submit "保存" %>
-    </li>
-</ul>
+    <!--- https://qiita.com/miku66/items/9de7c5ef625d7704da2a --->
+    <ul>
+        <li id="name">
+            <%= form.label :name, "投稿者" %>
+            <%= form.text_field :name %>
+        </li>
+        <li id="content">
+            <%= form.label :content, "内容" %>
+            <%= form.text_area :content, :size => "60x10" %>
+        </li>
+        <li id="delete-password">
+            <%= form.label :delete_password, "削除用パスワード" %>
+            <%= form.password_field :delete_password %>
+        </li>
+        <li id="submit-button">
+            <%= form.submit "保存" %>
+        </li>
+    </ul>
 <% end %>
 
 <h3 class="my-3">投稿一覧</h3>

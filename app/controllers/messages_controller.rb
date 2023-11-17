@@ -1,9 +1,23 @@
 class MessagesController < ApplicationController
     def create
         message = Message.new(message_params)
-        message.save
+        if message.save
+            session[:message] = nil
+            flash[:info] = ["保存しました。"]
+            redirect_to "/programs/#{message["program_id"]}"
+        else
+            # 失敗の場合、ルーティングせず、再描画
+            # 変数を用意しておく必要あり
+            # URLが変わってしまう
+            # @program = Program.find(message["program_id"])
+            # @message = message
+            # render "programs/show"
 
-        redirect_to "/programs/#{message["program_id"]}"
+            # https://qiita.com/yuyasat/items/49e3296f3c64fccc7811
+            session[:message] = message.attributes.slice(*message_params.keys)
+            flash[:danger] = message.errors.full_messages
+            redirect_to "/programs/#{message["program_id"]}"
+        end
     end
 
     def destroy

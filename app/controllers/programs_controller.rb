@@ -2,6 +2,8 @@ require 'date'
 
 class ProgramsController < ApplicationController
   def index
+    session[:message] = nil
+
     selected_prefecture_code = 14
     today = Date.today.strftime('%Y%m%d')
 
@@ -14,5 +16,6 @@ class ProgramsController < ApplicationController
 
   def show
     @program = Program.find(params[:id])
+    @message = Message.new(session[:message])
   end
 end

@@ -34,20 +34,21 @@
     <ul>
         <li id="name">
             <%= form.label :name, "投稿者" %>
-            <%= form.text_field :name %>
+            <%= form.text_field :name, class: "form-control" %>
         </li>
         <li id="content">
             <%= form.label :content, "内容" %>
-            <%= form.text_area :content, :size => "60x10" %>
+            <%= form.text_area :content, :size => "60x10", class: "form-control" %>
         </li>
         <li id="delete-password">
             <%= form.label :delete_password, "削除用パスワード" %>
-            <%= form.password_field :delete_password %>
-        </li>
-        <li id="submit-button">
-            <%= form.submit "保存" %>
+            <%= form.password_field :delete_password, class: "form-control" %>
         </li>
     </ul>
+    <div class="text-end">
+        <%= form.submit "保存", class: "btn btn-primary" %>
+    </div>
+</li>
 <% end %>
 
 <h3 class="my-3">投稿一覧</h3>

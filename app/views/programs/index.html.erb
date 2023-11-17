@@ -1,16 +1,37 @@
 <h1>ラジオ番組表</h1>
 
-<table class="table">
-    <% @stations.each do |station| %>
+<table class="table table-bordered">
+    <thead>
         <tr>
-            <th><%= station['name'] %></th>
-            <% station.programs.each do |program| %>
-                <td>
-                    <a href="/programs/<%= program.id %>">
-                        <%= program['title'] %>
-                    </a>
-                </td>
+            <th></th>
+            <% @stations.each do |station| %>
+                <th><%= station.name %></th>
             <% end %>
         </tr>
-    <% end %>
+    </thead>
+    <tbody>
+        <% @hours.each do |hour| %>
+            <tr>
+                <th><%= hour %></th>
+                <% @stations.each do |station| %>
+                    <td>
+                        <% if !station.progHash[hour].nil? %>
+                            <ul class="list-group">
+                                <% station.progHash[hour].each do |program| %>
+                                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                                        <a href="/programs/<%= program.id %>">
+                                            <%= program.title %>
+                                        </a>
+                                        <% if program.messages.count > 0 %>
+                                            <span class="badge bg-primary rounded-pill"><%= program.messages.count %></span>
+                                        <% end %>
+                                    </li>
+                                <% end %>
+                            </ul>
+                        <% end %>
+                    </td>
+                <% end %>
+            </tr>
+        <% end %>
+    </tbody>
 </table>

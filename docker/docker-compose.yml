@@ -6,6 +6,7 @@ services:
     image: mariadb:10.7
     environment:
       MARIADB_ROOT_PASSWORD: password
+      TZ: Asia/Tokyo
     volumes:
       - radio-data:/var/lib/mysql
   radio-web:   # docker-compose exec service name bash

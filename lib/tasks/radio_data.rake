@@ -2,8 +2,15 @@ require 'csv'
 require 'open-uri'
 require 'kconv'
 require 'date'
+require 'logger'
 
 namespace :radio_data do
+    desc "test"
+    task test: :environment do
+        logger = Logger.new('log/task.log')
+        logger.debug('test')
+    end
+
     desc "初回実行: 都道府県を保存する"
     task save_prefectures: :environment do
         puts Dir.pwd

@@ -1,26 +1,31 @@
-<h1>ラジオ番組表 <%= @today.strftime('%Y/%m/%d') %></h1>
+<h1>Radibo</h1>
+<h5>ラジオ番組掲示板</h5>
 
-<h3 class="my-3">都道府県</h3>
+<div class="mt-5"></div>
 <%= form_with(url: programs_index_path) do |form| %>
-    <%= form.select :prefecture, @prefectures, {selected: @selected_prefecture_code}, {class: "form-select w-25"} %>
-    <div class="text-start">
-        <%= form.submit "OK", class: "btn btn-primary my-3" %>
+    <div class="row">
+        <div class="col-auto col-form-label "><%= form.label :prefecture, "都道府県" %></div>
+        <div class="col-auto"><%= form.select :prefecture, @prefectures, {selected: @selected_prefecture_code}, {class: "form-select"} %></div>
+        <div class="col-auto"><%= form.submit "OK", class: "btn btn-primary" %></div>
     </div>
 <% end %>
 
-<table class="table table-bordered mt-5">
+<div class="mt-5"></div>
+<h5><%= @today.strftime('%Y/%m/%d') %></h5>
+<p>※5時更新</p>
+<table class="table table-bordered programs-table">
     <thead>
         <tr>
-            <th></th>
+            <th class="bg-info"></th>
             <% @stations.each do |station| %>
-                <th><%= station.name %></th>
+                <th class="bg-info"><%= station.name %></th>
             <% end %>
         </tr>
     </thead>
     <tbody>
         <% @hours.each do |hour| %>
             <tr>
-                <th><%= hour %></th>
+                <th class="bg-info"><%= hour %></th>
                 <% @stations.each do |station| %>
                     <td>
                         <% if !station.progHash[hour].nil? %>

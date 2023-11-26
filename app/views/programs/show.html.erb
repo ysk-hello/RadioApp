@@ -1,7 +1,6 @@
 <h1><%= @program['title'] %></h1>
 
-<p><%= @program['start_time'].strftime("%Y-%m-%d %H:%M:%S") %></p>
-<p><%= @program['end_time'].strftime("%Y-%m-%d %H:%M:%S") %></p>
+<p><%= @program['start_time'].strftime("%Y-%m-%d %H:%M:%S") %> ～ <%= @program['end_time'].strftime("%Y-%m-%d %H:%M:%S") %></p>
 <image src=<%= @program['image'] %>>
 
 <ul>

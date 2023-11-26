@@ -33,6 +33,6 @@ ENV.each { |k, v| env(k, v) } # これを追加
 #     rake "radio_data:save_prefectures"
 # end
 
-# every 1.day, at: '16:25 pm' do
-#     rake "task_sample:hello"
-# end
+every 1.day, at: '1:50 am' do
+    rake "radio_data:save_programs"
+end

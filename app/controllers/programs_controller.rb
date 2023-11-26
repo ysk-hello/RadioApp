@@ -2,7 +2,7 @@ require 'date'
 
 class ProgramsController < ApplicationController
   def index
-    @selected_prefecture_code = 14
+    @selected_prefecture_code = 13
     if request.post?
       @selected_prefecture_code = params[:prefecture]
     end

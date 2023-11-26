@@ -40,7 +40,7 @@
                 </span>
             </div>
             <div class="card-text p-3">
-                <%= message.content %>
+                <%= raw Rinku.auto_link(simple_format(message.content), :all, 'target="_blank"') %>
             </div>
             <div class="card-footer text-end">
                 <%= message.created_at.strftime("%Y-%m-%d %H:%M:%S") %>

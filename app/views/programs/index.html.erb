@@ -2,6 +2,7 @@
 <h5>ラジオ番組掲示板</h5>
 
 <div class="mt-5"></div>
+<!-- 都道府県の選択 -->
 <%= form_with(url: programs_index_path) do |form| %>
     <div class="row">
         <div class="col-auto col-form-label "><%= form.label :prefecture, "都道府県" %></div>
@@ -13,6 +14,7 @@
 <div class="mt-5"></div>
 <h5><%= @today.strftime('%Y/%m/%d') %></h5>
 <p>※5時更新</p>
+<!-- ラジオ番組表 -->
 <table class="table table-bordered programs-table">
     <thead>
         <tr>

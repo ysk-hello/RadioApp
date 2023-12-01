@@ -2,10 +2,11 @@ class MessagesController < ApplicationController
     def create
         message = Message.new(message_params)
         
+        # バリデーション
         if message.valid?
             # ハッシュ化
-            # https://qiita.com/kobayashimakoto/items/603d6434ba1952dfea69
             message.delete_password = BCrypt::Password.create(message.delete_password)
+            # 保存
             message.save
 
             session[:message] = nil
@@ -21,13 +22,13 @@ class MessagesController < ApplicationController
     def destroy
         message = Message.find(params[:messageId])
 
-        pp message
+        # パスワードチェック
         if BCrypt::Password.new(message.delete_password) == params[:password] then
+            # 削除
             message.destroy
-            puts "destroy"
+
             flash[:info] = ["削除しました。"]
         else
-            puts "wrong password"
             flash[:danger] = ["削除できませんでした。パスワードが異なっています。"]
         end
 

@@ -1,5 +1,6 @@
 <h1><%= @program['title'] %></h1>
 
+<!-- 番組概要 -->
 <p><%= @program['start_time'].strftime("%Y-%m-%d %H:%M:%S") %> ～ <%= @program['end_time'].strftime("%Y-%m-%d %H:%M:%S") %></p>
 <image src=<%= @program['image'] %>>
 
@@ -20,7 +21,7 @@
 <hr>
 
 <h2>掲示板</h2>
-
+<!-- フラッシュメッセージ -->
 <% flash.each do |flash_message_type, flash_messages| %>
     <% flash_messages.each do |flash_message| %>
         <div class="alert alert-<%= flash_message_type %>"><%= flash_message %></div>
@@ -107,6 +108,7 @@
 
 
 <script>
+    // 削除用パスワードモーダル： idセット
     const deletePasswordModal = document.getElementById('deletePasswordModal');
     if (deletePasswordModal) {
         deletePasswordModal.addEventListener('show.bs.modal', event => {

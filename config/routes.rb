@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   get 'programs/:id', to: 'programs#show'
   
   post 'messages/create'
-  get 'messages/delete/:id/:pwd', to: 'messages#destroy'
+  post 'messages/delete', to: 'messages#destroy'
 end

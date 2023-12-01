@@ -36,7 +36,7 @@
             <div class="card-header">
                 <%= message.name %> (No.<%= index+1 %>)
                 <span class="float-end">
-                    <a href="javascript:deleteMessage(<%= message.id %>)" class="btn btn-danger">削除</a>
+                    <button class="btn btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deletePasswordModal" data-bs-deleteId="<%= message.id %>">削除</button>
                 </span>
             </div>
             <div class="card-text p-3">
@@ -82,14 +82,39 @@
 
 <%= link_to 'Back', root_path %>
 
+<!-- 削除用パスワード入力モーダル -->
+<div class="modal fade" id="deletePasswordModal" tabIndex="-1" aria-labelledby="deletePasswordModal" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <%= form_with url: "/messages/delete" do |form| %>
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5">title</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>削除用パスワードを入力してください。</p>
+                    <%= form.text_field :password %>
+                    <%= form.hidden_field :messageId %>
+                </div>
+                <div class="modal-footer">
+                    <%= form.submit 'OK', class: "btn btn-primary" %>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
+
+
 <script>
-    function deleteMessage(id){
-        let password = prompt("削除用パスワードを入力してください。")
-        if(password && password.length > 0) {
-            document.location = "/messages/delete/" + id + "/" + password;
-        }
-        else{
-            console.log('cancel or empty');
-        }
-    }
+    const deletePasswordModal = document.getElementById('deletePasswordModal');
+    if (deletePasswordModal) {
+        deletePasswordModal.addEventListener('show.bs.modal', event => {
+            const button = event.relatedTarget;
+            const deleteId = button.getAttribute('data-bs-deleteId');
+
+            const messageId = deletePasswordModal.querySelector('#messageId');
+            messageId.value = deleteId;
+        });
+    };
 </script>

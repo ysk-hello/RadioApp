@@ -26,10 +26,10 @@ class MessagesController < ApplicationController
     end
 
     def destroy
-        message = Message.find(params[:id])
+        message = Message.find(params[:messageId])
 
         pp message
-        if BCrypt::Password.new(message.delete_password) == params[:pwd] then
+        if BCrypt::Password.new(message.delete_password) == params[:password] then
             message.destroy
             puts "destroy"
             flash[:info] = ["削除しました。"]

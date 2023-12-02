@@ -89,7 +89,7 @@
         <div class="modal-content">
             <%= form_with url: "/messages/delete" do |form| %>
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5">title</h1>
+                    <h1 class="modal-title fs-5">削除</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -98,7 +98,7 @@
                     <%= form.hidden_field :messageId %>
                 </div>
                 <div class="modal-footer">
-                    <%= form.submit 'OK', class: "btn btn-primary" %>
+                    <%= form.submit '削除', class: "btn btn-danger" %>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
                 </div>
             <% end %>
